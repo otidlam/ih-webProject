@@ -34,6 +34,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", index);
 app.use("/playlist", playlist);
+app.use("/playlist/list", playlist);
+app.use("/playlist/room", playlist);
 
 // --  error handler  --
 

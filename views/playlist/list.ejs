@@ -1,1 +1,10 @@
-rdfdf
+<h1>Playlist list</h1>
+
+<ul>
+    <% playlists.forEach((playlist) => { %>
+      <li>
+        <%= playlist.name %> <a href="/playlist/playlist-room?id= <%= playlists._id %>"</a>Join</a>
+      </li>
+    <%  }) %>
+</ul>
+

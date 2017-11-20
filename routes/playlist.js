@@ -33,8 +33,18 @@ router.post("/new", (req, res, next) => {
     if (err) {
       next(err);
     } else {
-      res.redirect("/playlist");
+      res.redirect("/playlist/list");
     }
+  });
+});
+
+/* GET playlist room page. */
+
+router.get("/room", (req, res, next) => {
+  const playlistId = req.query.id;
+  Playlist.findById(playlistId, (err, playlist) => {
+    if (err) { return next(err); }
+    res.render("playlist/room", { playlist: playlist });
   });
 });
 
