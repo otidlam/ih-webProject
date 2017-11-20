@@ -3,7 +3,7 @@
 <ul>
     <% playlists.forEach((playlist) => { %>
       <li>
-        <%= playlist.name %> <a href="/playlist/playlist-room?id= <%= playlists._id %>"</a>Join</a>
+        <%= playlist.name %> <a href="/playlist/room?id=<%= playlist.id %>"</a>Join</a>
       </li>
     <%  }) %>
 </ul>
