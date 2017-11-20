@@ -4,9 +4,8 @@ const express = require("express");
 const router = express.Router();
 const Playlist = require("../models/playlist").Playlist;
 
-
 /* GET playlist list all page. */
-router.get("/", function(req, res, next) {
+router.get("/", (req, res, next) => {
   Playlist.find({}, (err, playlists) => {
     if (err) {
       next(err);
@@ -21,7 +20,7 @@ router.get("/", function(req, res, next) {
 });
 
 /* GET playlist new page. */
-router.get("/new", function(req, res, next) {
+router.get("/new", function (req, res, next) {
   res.render("playlist/new");
 });
 
@@ -38,8 +37,5 @@ router.post("/new", (req, res, next) => {
     }
   });
 });
-
-
-
 
 module.exports = router;

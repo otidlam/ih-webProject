@@ -10,6 +10,7 @@
         "console": false
     },
     "rules": {
+        "quotes": ["error", "double"],
         "indent": [
             2,
             2
