@@ -7,13 +7,14 @@ const Playlist = require("../models/playlist").Playlist;
 
 /* GET playlist list all page. */
 router.get("/", function(req, res, next) {
-  Playlist.find({}, (err, res) => {
+  Playlist.find({}, (err, playlists) => {
     if (err) {
       next(err);
     } else {
       const data = {
-        playlists: res
+        playlists: playlists
       };
+      console.log(data);
       res.render("playlist/list", data);
     }
   });
