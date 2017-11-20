@@ -3,10 +3,10 @@
 
 ## usersStories
 
-## 404
+## 404 DONE
 As a user that is looking for something that doesn't exist i want to see a 404 page so i know that it doesn't exist for sure.
 
-## 500
+## 500 DONE
 As user that encountered an unexpected error while using the app i want to see a nice 500 error page, so that I know what happened.
 
 ## signUp
