@@ -21,13 +21,13 @@ As user I want to click on the logo and get redirected to the home page.
 ## Non logged - home page redirect
 As not logged user i want to be redirected to the login page if I try to add a song to a playlist or creating it.
 
-## Create playlist
+## Create playlist DONE
 As user I want to create a playlist.
 
 ## Search
 As user I want to search for playlist by name or user.
 
-## Join playlist
+## Join playlist DONE
 As user i want to be redirected to playlist page when I click "JOIN" .
 
 ## Add song
