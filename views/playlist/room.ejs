@@ -1,14 +1,22 @@
-<h1><%= playlist.name %></h1>
-<form action="/playlist/room" method="post">
-    <!-- soundcloud API -->
-  <input name="searchSong" type="text">
-  <button type="submit" class="btn-add">Add to playlist</button>
+<h1>
+    <%= playlist.name %>
+</h1>
 
-     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-  <div id="player"></div>
-</form>
+<div id="buttons">
+    <form action="/playlist/room/<%= playlist.id%>/search" method="POST">
+        <input id="query" name="searchQuery" type="text" />
+        <button id="search-button">Search</button>
+    </form>
 
+</div>
+<div id="search-container">
+</div>
+<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+<div id="player"></div>
+
+<script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/auth.js"></script>
 <script src="/javascripts/yt.js"></script>
 <script src="/javascripts/search.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-
+<script src="https://apis.google.com/js/client.js?onload=init"></script>

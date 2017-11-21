@@ -1,19 +1,19 @@
 "use strict";
 
 const express = require("express");
+const axios = require("axios");
 const router = express.Router();
 const Playlist = require("../models/playlist").Playlist;
 
 /* GET playlist list all page. */
 router.get("/", (req, res, next) => {
-  Playlist.find({}, (err, playlists) => {
+  Playlist.find({}, (err, result) => {
     if (err) {
       next(err);
     } else {
       const data = {
-        playlists: playlists
+        playlists: result
       };
-      console.log(data);
       res.render("playlist/list", data);
     }
   });
@@ -40,21 +40,46 @@ router.post("/new", (req, res, next) => {
 
 /* GET playlist room page. */
 
-router.get("/room", (req, res, next) => {
-  const playlistId = req.query.id;
+router.get("/room/:playlistID", (req, res, next) => {
+  const playlistId = req.params.playlistID;
   Playlist.findById(playlistId, (err, playlist) => {
     if (err) { return next(err); }
-    res.render("playlist/room", { playlist: playlist });
+    const data = {
+      playlist: playlist
+    };
+    res.render("playlist/room", data);
   });
 });
 
-router.post("/search", (req, res, next) => {
-  const searchSong = req.query.searchSong;
-  axios.get("dfdfddapi/searchSong").then(response => {
+router.post("/room/:playlistID/search", (req, res, next) => {
+  const playlistId = req.params.playlistID;
+  const query = req.body.searchQuery;
+  const url = `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}=${query}&part=snippet`;
+  axios
+    .get(url)
+    .then(response => {
+      const data = {
+        tempSongs: response.data.items
+      };
+
+      const newSongs = new Playlist(data);
+      newSongs.save(err => {
+        if (err) throw err;
+      });
+      // console.log("data", data);
+      res.redirect(`/playlist/room/${playlistId}/addsong`);
+    })
+    .catch(err => console.log(err));
+});
+
+router.get("/room/:playlistID/addsong", (req, res, next) => {
+  const playlistId = req.params.playlistID;
+  Playlist.findById(playlistId, (err, playlist) => {
+    if (err) { return next(err); }
     const data = {
-      searchResult: response.data
+      playlist: playlist
     };
-    res.render("/search", data);
+    res.render("playlist/addsong", data);
   });
 });
 

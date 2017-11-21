@@ -1,10 +1,10 @@
 <h1>Playlist list</h1>
 
 <ul>
-    <% playlists.forEach((playlist) => { %>
-      <li>
-        <%= playlist.name %> <a href="/playlist/room?id=<%= playlist.id %>"</a>Join</a>
-      </li>
+  <% playlists.forEach((playlist) => { %>
+    <li>
+      <%= playlist.name %>
+        <a href="/playlist/room/<%= playlist.id %>" </a>Join</a>
+    </li>
     <%  }) %>
 </ul>
-

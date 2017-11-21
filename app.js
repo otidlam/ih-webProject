@@ -1,5 +1,6 @@
 "use strict";
 
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const logger = require("morgan");
@@ -14,7 +15,7 @@ const app = express();
 
 // mongoose
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/DubJubeDB", {
+mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE,
   useMongoClient: true
@@ -34,8 +35,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", index);
 app.use("/playlist", playlist);
-app.use("/playlist/list", playlist);
-app.use("/playlist/room", playlist);
 
 // --  error handler  --
 
