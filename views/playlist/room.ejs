@@ -1,7 +1,14 @@
 <h1><%= playlist.name %></h1>
 <form action="/playlist/room" method="post">
     <!-- soundcloud API -->
-    <input name="search song" type="text">
-    <button type="submit" class="btn-add">Add to playlist</button>
-  </form>
+  <input name="searchSong" type="text">
+  <button type="submit" class="btn-add">Add to playlist</button>
+
+     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+  <div id="player"></div>
+</form>
+
+<script src="/javascripts/yt.js"></script>
+<script src="/javascripts/search.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 

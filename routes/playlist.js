@@ -48,4 +48,14 @@ router.get("/room", (req, res, next) => {
   });
 });
 
+router.post("/search", (req, res, next) => {
+  const searchSong = req.query.searchSong;
+  axios.get("dfdfddapi/searchSong").then(response => {
+    const data = {
+      searchResult: response.data
+    };
+    res.render("/search", data);
+  });
+});
+
 module.exports = router;
