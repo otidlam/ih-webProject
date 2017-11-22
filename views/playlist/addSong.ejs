@@ -1,10 +1,14 @@
-<% tempSongs.forEach(song => { %>
-    <div class="videoLi">
-        <h1>
-            <%= song.snippet.title %>
-        </h1>
-        <img src="<%= song.snippet.thumbnails.high.url %>">
-        <button id="search-button" action="/playlist/room/:playlistID>" method="POST">Add to playlist</button>
+<%= playlistId %>
 
-    </div>
-    <% })%>
+    <% tempSongs.forEach(song => { %>
+        <div class="videoLi">
+            <h1>
+                <%= song.snippet.title %>
+            </h1>
+            <img src="<%= song.snippet.thumbnails.high.url %>">
+            <form action="/playlist/room/<%= playlistId %>/song/<%= song.id.videoId %>" method="POST">
+                <button id="search-button">Add to playlist</button>
+            </form>
+
+        </div>
+        <% })%>

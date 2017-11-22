@@ -51,7 +51,6 @@ router.get("/room/:playlistID", (req, res, next) => {
   });
 });
 
-// router.post("/room/:playlistID/search", (req, res, next) => {
 router.post("/room/:playlistID/addSong", (req, res, next) => {
   const playlistId = req.params.playlistID;
   const query = req.body.searchQuery;
@@ -60,7 +59,8 @@ router.post("/room/:playlistID/addSong", (req, res, next) => {
     .get(url)
     .then(response => {
       const data = {
-        tempSongs: response.data.items
+        tempSongs: response.data.items,
+        playlistId: playlistId
       };
       console.log("data", data);
       res.render("playlist/addSong", data);
@@ -77,6 +77,19 @@ router.get("/room/:playlistID/addSong", (req, res, next) => {
     };
     res.render("playlist/addSong", data);
   });
+});
+
+router.post("/room/:playlistID/song/:songID", (req, res, next) => {
+  const playlistId = req.params.playlistID;
+  const songId = req.params.songID;
+  Playlist.findOneAndUpdate({ _id: playlistId } /*, push song ID into array songs */);
+  res.send("playlist/addSong");
+});
+
+router.post("/room/:playlistID", (req, res, next) => {
+  // const playlistId = req.params.playlistID;
+  const query = req.body.searchQuery;
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&type=video&key=${process.env.YOUTUBE_API_KEY}`;
 });
 
 module.exports = router;
