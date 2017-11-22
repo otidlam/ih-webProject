@@ -54,7 +54,7 @@ router.get("/room/:playlistID", (req, res, next) => {
 router.post("/room/:playlistID/search", (req, res, next) => {
   const playlistId = req.params.playlistID;
   const query = req.body.searchQuery;
-  const url = `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}=${query}&part=snippet`;
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&type=video&key=${process.env.YOUTUBE_API_KEY}`;
   axios
     .get(url)
     .then(response => {
@@ -66,8 +66,8 @@ router.post("/room/:playlistID/search", (req, res, next) => {
       newSongs.save(err => {
         if (err) throw err;
       });
-      // console.log("data", data);
-      res.redirect(`/playlist/room/${playlistId}/addsong`);
+      console.log("data", data);
+      res.render("playlist/addsong", { data });
     })
     .catch(err => console.log(err));
 });
