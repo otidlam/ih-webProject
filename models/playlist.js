@@ -6,7 +6,6 @@ const Schema = mongoose.Schema;
 const playlistSchema = new Schema({
   name: String,
   // owner: userId
-  tempSongs: [],
   songs: [
     // songID API soundcloud
   ]

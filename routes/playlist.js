@@ -6,7 +6,7 @@ const router = express.Router();
 const Playlist = require("../models/playlist").Playlist;
 
 /* GET playlist list all page. */
-router.get("/", (req, res, next) => {
+router.get("/list", (req, res, next) => {
   Playlist.find({}, (err, result) => {
     if (err) {
       next(err);
@@ -51,7 +51,8 @@ router.get("/room/:playlistID", (req, res, next) => {
   });
 });
 
-router.post("/room/:playlistID/search", (req, res, next) => {
+// router.post("/room/:playlistID/search", (req, res, next) => {
+router.post("/room/:playlistID/addSong", (req, res, next) => {
   const playlistId = req.params.playlistID;
   const query = req.body.searchQuery;
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&type=video&key=${process.env.YOUTUBE_API_KEY}`;
@@ -61,25 +62,20 @@ router.post("/room/:playlistID/search", (req, res, next) => {
       const data = {
         tempSongs: response.data.items
       };
-
-      const newSongs = new Playlist(data);
-      newSongs.save(err => {
-        if (err) throw err;
-      });
       console.log("data", data);
-      res.render("playlist/addsong", { data });
+      res.render("playlist/addSong", data);
     })
     .catch(err => console.log(err));
 });
 
-router.get("/room/:playlistID/addsong", (req, res, next) => {
+router.get("/room/:playlistID/addSong", (req, res, next) => {
   const playlistId = req.params.playlistID;
   Playlist.findById(playlistId, (err, playlist) => {
     if (err) { return next(err); }
     const data = {
       playlist: playlist
     };
-    res.render("playlist/addsong", data);
+    res.render("playlist/addSong", data);
   });
 });
 

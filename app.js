@@ -36,21 +36,22 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", index);
 app.use("/playlist", playlist);
 
-// --  error handler  --
+// -- 404 and error handler
 
-// error 404
-app.use((err, requ, res, next) => {
+// NOTE: requires a views/not-found.ejs template
+app.use(function (req, res, next) {
   res.status(404);
   res.render("notFound");
 });
-// error 500
+
+// NOTE: requires a views/error.ejs template
 app.use(function (err, req, res, next) {
   // always log the error
   console.error("ERROR", req.method, req.path, err);
 
   // only render if the error ocurred before sending the response
   if (!res.headersSent) {
-    res.status(err.status || 500);
+    res.status(500);
     res.render("error");
   }
 });
