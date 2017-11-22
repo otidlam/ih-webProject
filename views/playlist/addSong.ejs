@@ -1,8 +1,10 @@
-<ul>
-    <% tempSongs.forEach(song => { %>
-        <li>
+<% tempSongs.forEach(song => { %>
+    <div class="videoLi">
+        <h1>
             <%= song.snippet.title %>
-                <%= song.snippet.title %>
-        </li>
-        <% })%>
-</ul>
+        </h1>
+        <img src="<%= song.snippet.thumbnails.high.url %>">
+        <button id="search-button" action="/playlist/room/:playlistID>" method="POST">Add to playlist</button>
+
+    </div>
+    <% })%>
