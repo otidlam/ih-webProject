@@ -7,8 +7,9 @@
             </h1>
             <img src="<%= song.snippet.thumbnails.high.url %>">
             <form action="/playlist/room/<%= playlistId %>/song/<%= song.id.videoId %>" method="POST">
-                <button id="search-button">Add to playlist</button>
+                <input type="hidden" name="title" value="<%= song.snippet.title %>">
+                <input type="hidden" name="thumbnail" value="<%= song.snippet.thumbnails.medium.url %>">
+                <input type="submit" id="search-button" value="Add to playlist">
             </form>
-
         </div>
         <% })%>

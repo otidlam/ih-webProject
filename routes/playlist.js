@@ -62,7 +62,7 @@ router.post("/room/:playlistID/addSong", (req, res, next) => {
         tempSongs: response.data.items,
         playlistId: playlistId
       };
-      console.log("data", data);
+      // console.log("data", data);
       res.render("playlist/addSong", data);
     })
     .catch(err => console.log(err));
@@ -82,14 +82,46 @@ router.get("/room/:playlistID/addSong", (req, res, next) => {
 router.post("/room/:playlistID/song/:songID", (req, res, next) => {
   const playlistId = req.params.playlistID;
   const songId = req.params.songID;
-  Playlist.findOneAndUpdate({ _id: playlistId } /*, push song ID into array songs */);
-  res.send("playlist/addSong");
+  const songTitle = req.body.title;
+  const songThumbnail = req.body.thumbnail;
+  console.log(songId, songTitle, songThumbnail);
+  console.log("id", playlistId);
+  // title: songTitle, thumbnail: songThumbnail
+
+  const update = {
+    id: songId,
+    title: songTitle,
+    thumbnail: songThumbnail
+  };
+  Playlist.findByIdAndUpdate(playlistId, { $push: { songs: update } }, (err, result) => {
+    if (err) { return next(err); };
+    res.redirect(`/playlist/room/${playlistId}/`);
+  });
+
+  // Playlist.findOne({ _id: playlistId }, (err, result) => {
+  //   if (err) {
+  //     return next(err);
+  //   }
+  //   result.songs.push(songId);
+
+  //   const data = {
+  //     result
+  //   };
+  //   console.log(playlistId);
+  //   Playlist.update({ _id: playlistId }, { $set: data }, (err, rslt) => {
+  //     if (err) {
+  //       return next(err);
+  //     }
+  //     console.log("reeesult", rslt);
+  //     res.redirect(`/playlist/room/${playlistId}/`);
+  //   });
+  // });
 });
 
-router.post("/room/:playlistID", (req, res, next) => {
-  // const playlistId = req.params.playlistID;
-  const query = req.body.searchQuery;
-  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&type=video&key=${process.env.YOUTUBE_API_KEY}`;
-});
+// router.post("/room/:playlistID", (req, res, next) => {
+//   // const playlistId = req.params.playlistID;
+//   // const query = req.body.searchQuery;
+//   // const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&type=video&key=${process.env.YOUTUBE_API_KEY}`;
+// });
 
 module.exports = router;
