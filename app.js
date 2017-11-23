@@ -7,9 +7,15 @@ const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const configurePassport = require("./helpers/passport");
+const passport = require("passport");
+const flash = require("connect-flash");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 
 const index = require("./routes/index");
 const playlist = require("./routes/playlist");
+const auth = require("./routes/auth");
 
 const app = express();
 
@@ -20,6 +26,24 @@ mongoose.connect(process.env.MONGODB_URI, {
   reconnectTries: Number.MAX_VALUE,
   useMongoClient: true
 });
+// Sessions
+app.use(session({
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  }),
+  secret: "some-strfdddfdfing",
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000
+  }
+}));
+// - passport
+configurePassport();
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -33,8 +57,16 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use((req, res, next) => {
+  res.locals = {
+    user: req.user
+  };
+  next();
+});
+
 app.use("/", index);
 app.use("/playlist", playlist);
+app.use("/auth", auth);
 
 // -- 404 and error handler
 

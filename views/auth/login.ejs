@@ -1,0 +1,24 @@
+<!-- views/auth/login.ejs -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 centered-form">
+            <form action="/auth/login" method="post">
+                <div class="user-login">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" class="form-control">
+                </div>
+                <div class="user-login">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control">
+                </div>
+                <button type="login">Log in</button>
+            </form>
+            <% if (message) { %>
+                <p>
+                    <%= message %>
+                </p>
+                <% } %>
+                    <a class="btn signup" href="/auth/signup">Don't have an account?</a>
+        </div>
+    </div>
+</div>
