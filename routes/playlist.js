@@ -33,7 +33,7 @@ router.post("/new", (req, res, next) => {
     if (err) {
       next(err);
     } else {
-      res.redirect("/playlist/list");
+      res.redirect(`/playlist/room/${newPlaylist.id}`);
     }
   });
 });
@@ -49,6 +49,16 @@ router.get("/room/:playlistID", (req, res, next) => {
     };
     res.render("playlist/room", data);
   });
+});
+
+router.post("/room/:id", (req, res, next) => {
+  const playlistId = req.params.id;
+  Playlist.findByIdAndUpdate(playlistId, { $pop: { songs: -1 } }, (err, result) => {
+    if (err) { next(err); };
+  });
+  console.log("Tseeeee");
+
+  setTimeout(() => { res.redirect(`/playlist/room/${playlistId}/`); }, 5000);
 });
 
 router.post("/room/:playlistID/addSong", (req, res, next) => {

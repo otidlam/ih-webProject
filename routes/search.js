@@ -5,7 +5,7 @@ const axios = require("axios");
 const router = express.Router();
 const Playlist = require("../models/playlist").Playlist;
 
-router.post("/playlist/search/:", (req, res) => {
+router.post("/playlist/search/", (req, res) => {
   var db = req.DubJubeDB;
   console.log(req.body);
   db.playlists.find({
