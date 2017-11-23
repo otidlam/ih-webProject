@@ -134,4 +134,18 @@ router.post("/room/:playlistID/song/:songID", (req, res, next) => {
 //   // const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&type=video&key=${process.env.YOUTUBE_API_KEY}`;
 // });
 
+router.post("/search", (req, res, next) => {
+  const search = req.body.searchPlaylist;
+  const query = { name: { $regex: search, $options: "i" } };
+  Playlist.find(query, (err, searchResult) => {
+    if (err) {
+      next(err);
+    }
+    const data = {
+      searchResult: searchResult
+    };
+    res.render("index", data);
+  });
+});
+
 module.exports = router;

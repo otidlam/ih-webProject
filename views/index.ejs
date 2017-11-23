@@ -20,9 +20,18 @@
         <div>
           <form action="/playlist/search" method="post">
             <input name="searchPlaylist">
-            <input type="submit" class="search" value="search">
+            <button type="submit" class="search">Go!</button>
           </form>
-
+          <% if(searchResult !== null) { %>
+            <% JSON.stringify(searchResult, null, 2) %>
+              <% searchResult.forEach((el) => { %>
+                <li>
+                  <a href="/playlist/room/<%= el._id %>">
+                    <%= el.name %>
+                  </a>
+                </li>
+                <% }) %>
+                  <% } %>
         </div>
 </body>
 
