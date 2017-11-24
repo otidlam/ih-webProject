@@ -2,40 +2,48 @@
 <html>
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <!--320-->
   <title>DubJube</title>
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 
 <body>
+  <header>
+    <%if (user){ %>
+      <a class="btn logout" href="/auth/logout">Log Out</a>
+      <% } else { %>
+        <a class="btn login" href="/auth/login">Log In</a>
+        <a class="btn signup" href="/auth/signup">Sign Up</a>
+        <% } %>
+  </header>
 
-  <%if (user){ %>
-    <a class="btn logout" href="/auth/logout">logout</a>
-    <% } else { %>
-      <a class="btn login" href="/auth/login">login</a>
-      <a class="btn signup" href="/auth/signup">signup</a>
-      <% } %>
-        <h1>Dub Jube</h1>
-        <a class="btn create-playlist" href="/playlist/new">Create playlist</a>
+  <div class="logo">
+    <img src="img/Logo.png">
+  </div>
+  <div class="create">
+    <a class="btn create-playlist" href="/playlist/new">Create playlist</a>
+  </div>
+  <div class="search">
+    <form action="/playlist/search" method="post">
+      <input type="search" name="searchPlaylist">
+      <button type="submit" class="search">Go!</button>
+    </form>
+    <% if(searchResult !== null) { %>
+      <% JSON.stringify(searchResult, null, 2) %>
+        <% searchResult.forEach((el) => { %>
+          <li>
+            <a href="/playlist/room/<%= el._id %>">
+              <%= el.name %>
+            </a>
+          </li>
+          <% }) %>
+            <% } %>
+  </div>
 
-        <div>
-          <form action="/playlist/search" method="post">
-            <input type="search" name="searchPlaylist">
-            <button type="submit" class="search">Go!</button>
-          </form>
-          <% if(searchResult !== null) { %>
-            <% JSON.stringify(searchResult, null, 2) %>
-              <% searchResult.forEach((el) => { %>
-                <li>
-                  <a href="/playlist/room/<%= el._id %>">
-                    <%= el.name %>
-                  </a>
-                </li>
-                <% }) %>
-                  <% } %>
-        </div>
-
-        <footer>
-        </footer>
+  <footer>
+    <img src="img/IMG.png" alt="footer">
+  </footer>
 </body>
 
 </html>

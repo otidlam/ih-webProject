@@ -94,9 +94,6 @@ router.post("/room/:playlistID/song/:songID", (req, res, next) => {
   const songId = req.params.songID;
   const songTitle = req.body.title;
   const songThumbnail = req.body.thumbnail;
-  console.log(songId, songTitle, songThumbnail);
-  console.log("id", playlistId);
-  // title: songTitle, thumbnail: songThumbnail
 
   const update = {
     id: songId,
@@ -107,32 +104,7 @@ router.post("/room/:playlistID/song/:songID", (req, res, next) => {
     if (err) { return next(err); };
     res.redirect(`/playlist/room/${playlistId}/`);
   });
-
-  // Playlist.findOne({ _id: playlistId }, (err, result) => {
-  //   if (err) {
-  //     return next(err);
-  //   }
-  //   result.songs.push(songId);
-
-  //   const data = {
-  //     result
-  //   };
-  //   console.log(playlistId);
-  //   Playlist.update({ _id: playlistId }, { $set: data }, (err, rslt) => {
-  //     if (err) {
-  //       return next(err);
-  //     }
-  //     console.log("reeesult", rslt);
-  //     res.redirect(`/playlist/room/${playlistId}/`);
-  //   });
-  // });
 });
-
-// router.post("/room/:playlistID", (req, res, next) => {
-//   // const playlistId = req.params.playlistID;
-//   // const query = req.body.searchQuery;
-//   // const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&type=video&key=${process.env.YOUTUBE_API_KEY}`;
-// });
 
 router.post("/search", (req, res, next) => {
   const search = req.body.searchPlaylist;
