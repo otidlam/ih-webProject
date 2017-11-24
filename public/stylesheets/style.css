@@ -1,8 +1,20 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: white, "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgb(30, 30, 30);
+}
+
+a,
+h1 {
+  color: rgb(255, 255, 255);
 }
 
 a {
-  color: #00B7FF;
+  font-size: 70px;
+}
+
+input[type=search] {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid rgb(255, 0, 58);
+  border-radius: 10px;
 }

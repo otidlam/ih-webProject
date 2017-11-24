@@ -19,7 +19,7 @@
 
         <div>
           <form action="/playlist/search" method="post">
-            <input name="searchPlaylist">
+            <input type="search" name="searchPlaylist">
             <button type="submit" class="search">Go!</button>
           </form>
           <% if(searchResult !== null) { %>
@@ -33,6 +33,9 @@
                 <% }) %>
                   <% } %>
         </div>
+
+        <footer>
+        </footer>
 </body>
 
 </html>
