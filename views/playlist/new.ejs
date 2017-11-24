@@ -1,6 +1,21 @@
-<h1>Hola¿ que ase</h1>
+<header>
+  <div class="logo-header">
+    <a href="/">
+      <img src="/img/Logo.png">
+    </a>
+  </div>
+  <%if (user){ %>
+    <a class="btn-logout" href="/auth/logout">Log Out</a>
+    <% } else { %>
+      <a class="btn-login" href="/auth/login">Log In</a>
+      <a class="btn-signup" href="/auth/signup">Sign Up</a>
+      <% } %>
+</header>
+<div class="container">
+  <h1>New Playlist</h1>
 
-<form action="/playlist/new" method="post">
-  <input name="playlistName" type="text">
-  <button type="submit" class="btn-create">Create</button>
-</form>
+  <form action="/playlist/new" method="post">
+    <input name="playlistName" type="search">
+    <button type="submit" class="btn-create">Create</button>
+  </form>
+</div>
