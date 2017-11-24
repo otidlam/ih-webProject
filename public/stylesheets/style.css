@@ -8,25 +8,81 @@ html {
   box-sizing: inherit;
 }
 
-html,
-body {
-  height: 100%;
+html {
+  height: 100vh;
   background-color: rgb(30, 30, 30);
 }
 
-html,
 body {
   margin: 0px;
-  padding: 0px;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
-body {
+header {
+  font-size: 18px;
+  padding: 10px 5px;
+  height: 70px;
+}
+
+.logo-header img {
+  height: 50px;
+  width: auto;
+  float: left;
+}
+
+.btn-login,
+.btn-signup,
+.btn-logout {
+  color: white;
+  font-size: 18px;
+  border-radius: 10px;
+  padding: 2px 7px;
+  float: right;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+.btn-login {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid rgb(255, 0, 58);
+}
+
+.btn-signup {
+  background-color: rgb(255, 0, 58);
+  border: 1px solid #8D0092;
+}
+
+.btn-logout {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid rgb(255, 0, 58);
+}
+
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.playlist-search {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.playlist-search form input {
+  width: 70%;
+}
+
+.playlist-search form button {
+  width: 20%;
 }
 
 a,
@@ -39,20 +95,9 @@ a {
   text-decoration: none;
 }
 
-div {
-  display: flex;
-  justify-content: center;
-}
-
-header {
-  position: absolute;
-  width: 100%;
-  top: 0;
-}
-
 .logo {
-  margin-top: 25%;
-  margin-bottom: 20%;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 .create {
@@ -67,11 +112,6 @@ input[type=search] {
   border-radius: 10px;
 }
 
-.search input {
-  width: 50%;
-  height: 30px;
-}
-
 button {
   font-size: 18px;
   color: white;
@@ -81,15 +121,53 @@ button {
   border-radius: 10px;
 }
 
-footer {
-  margin: 0px;
-  padding: 0px;
-  position: absolute;
+#player {
   width: 100%;
+}
+
+.search-form {
+  margin-top: 20px;
+}
+
+.title-playlist {
+  margin-top: 10px;
+}
+
+.song-list {
+  color: white;
+  font-size: 22px;
+}
+
+.song {
+  margin-top: 20px;
+  margin-left: 7.5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  border-bottom: 1px solid grey;
+  padding-bottom: 20px;
+  width: 85%;
+}
+
+.song-title {
+  margin-left: 10px;
+}
+
+.song-thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+footer {
+  min-width: 100%;
+  position: fixed;
   bottom: 0;
 }
 
-footer img {
-  height: 100%;
-  bottom: 0;
+.img-footer {
+  margin-bottom: -4px;
+  min-width: 100%;
+  max-height: 152px;
 }

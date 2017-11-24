@@ -18,7 +18,7 @@ router.post("/signup", (req, res, next) => {
     const data = {
       message: "Please provide username and password"
     };
-    res.render("auth/signup", data);
+    res.redirect("/signup", data);
     return;
   }
   User.findOne({ username }, "username", (err, user) => {
@@ -41,10 +41,15 @@ router.post("/signup", (req, res, next) => {
     });
     newUser.save((err) => {
       if (err) {
-        next(err);
+        return next(err);
       }
+      req.login(newUser, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/");
+      });
     });
-    res.redirect("/");
   });
 });
 router.get("/login", (req, res, next) => {

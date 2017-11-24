@@ -1,28 +1,15 @@
-<!DOCTYPE html>
-<html>
+<%= playlistId %>
 
-<head>
-    <title>DubJube</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-</head>
-
-<body>
-
-    <%= playlistId %>
-
-        <% tempSongs.forEach(song => { %>
-            <div class="videoLi">
-                <h1>
-                    <%= song.snippet.title %>
-                </h1>
-                <img src="<%= song.snippet.thumbnails.high.url %>">
-                <form action="/playlist/room/<%= playlistId %>/song/<%= song.id.videoId %>" method="POST">
-                    <input type="hidden" name="title" value="<%= song.snippet.title %>">
-                    <input type="hidden" name="thumbnail" value="<%= song.snippet.thumbnails.medium.url %>">
-                    <input type="submit" id="search-button" value="Add to playlist">
-                </form>
-            </div>
-            <% })%>
-</body>
-
-</html>
+    <% tempSongs.forEach(song => { %>
+        <div class="videoLi">
+            <h1>
+                <%= song.snippet.title %>
+            </h1>
+            <img src="<%= song.snippet.thumbnails.high.url %>">
+            <form action="/playlist/room/<%= playlistId %>/song/<%= song.id.videoId %>" method="POST">
+                <input type="hidden" name="title" value="<%= song.snippet.title %>">
+                <input type="hidden" name="thumbnail" value="<%= song.snippet.thumbnails.medium.url %>">
+                <input type="submit" id="search-button" value="Add to playlist">
+            </form>
+        </div>
+        <% })%>

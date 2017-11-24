@@ -12,7 +12,7 @@ const passport = require("passport");
 const flash = require("connect-flash");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
-
+const expressLayouts = require("express-ejs-layouts");
 const index = require("./routes/index");
 const playlist = require("./routes/playlist");
 const auth = require("./routes/auth");
@@ -46,6 +46,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // view engine setup
+app.use(expressLayouts);
+app.set("layout", "layouts/main-layout");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 

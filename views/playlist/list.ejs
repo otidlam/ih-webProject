@@ -1,23 +1,10 @@
-<!DOCTYPE html>
-<html>
+<h1>Playlist list</h1>
 
-<head>
-  <title>DubJube</title>
-  <link rel="stylesheet" href="/stylesheets/style.css" />
-</head>
-
-<body>
-
-  <h1>Playlist list</h1>
-
-  <ul>
-    <% playlists.forEach((playlist) => { %>
-      <li>
-        <%= playlist.name %>
-          <a href="/playlist/room/<%= playlist._id %>" </a>Join</a>
-      </li>
-      <%  }) %>
-  </ul>
-</body>
-
-</html>
+<ul>
+  <% playlists.forEach((playlist) => { %>
+    <li>
+      <%= playlist.name %>
+        <a href="/playlist/room/<%= playlist._id %>" </a>Join</a>
+    </li>
+    <%  }) %>
+</ul>

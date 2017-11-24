@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-<html>
+<header>
+    <div class="logo-header">
+        <a href="/">
+            <img src="/img/Logo.png">
+        </a>
+    </div>
+    <%if (user){ %>
+        <a class="btn-logout" href="/auth/logout">Log Out</a>
+        <% } else { %>
+            <a class="btn-login" href="/auth/login">Log In</a>
+            <a class="btn-signup" href="/auth/signup">Sign Up</a>
+            <% } %>
+</header>
 
-<head>
-    <title>DubJube</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-</head>
 
-<body>
-
-    <h1>
-        <%= playlist.name %>
-    </h1>
-
+<div class="container">
     <div id="player"></div>
 
     <div id="buttons">
-        <form action="/playlist/room/<%= playlist.id%>/addSong" method="POST">
-            <input id="query" name="searchQuery" type="text" />
+        <form class="search-form" action="/playlist/room/<%= playlist.id%>/addSong" method="POST">
+            <input id="query" name="searchQuery" type="search" />
             <button id="search-button">Search</button>
         </form>
     </div>
@@ -26,27 +28,33 @@
         <input type="hidden" id="playlistId" value="<%= playlist.id %>">
 
         <% } %>
-
+            <h1 class="title-playlist">
+                <%= playlist.name %>
+            </h1>
             <% if(playlist.songs === []){ %>
                 <p>Empty playlist</p>
                 <% }else{ %>
-                    <ul>
+                    <div class="song-list">
                         <% playlist.songs.forEach((song) =>{ %>
-                            <li>
-                                <%= song.title %>
-                                    <img src="<%= song.thumbnail %>">
-                            </li>
+                            <div class="song">
+                                <div class="song-thumbnail">
+                                    <img class="song-thumbnail" src="<%= song.thumbnail %>">
+                                </div>
+                                <div class="song-title">
+                                    <%= song.title %>
+                                </div>
+                            </div>
+
                             <% }); %>
-                    </ul>
+                    </div>
                     <% } %>
+</div>
 
-                        <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
-                        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-                        <script src="/javascripts/auth.js"></script>
-                        <script src="/javascripts/search.js"></script>
-                        <script src="https://apis.google.com/js/client.js?onload=init"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
-                        <script src="/javascripts/yt.js"></script>
-</body>
 
-</html>
+<script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/auth.js"></script>
+<script src="/javascripts/search.js"></script>
+<script src="https://apis.google.com/js/client.js?onload=init"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
+<script src="/javascripts/yt.js"></script>

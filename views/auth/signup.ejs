@@ -1,42 +1,29 @@
-<!DOCTYPE html>
-<html>
+<!-- views/auth/signup.ejs -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 centered-form">
+            <form action="/auth/signup" method="post">
 
-<head>
-    <title>DubJube</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-</head>
-
-<body>
-
-    <!-- views/auth/signup.ejs -->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 centered-form">
-                <form action="/auth/signup" method="post">
-
-                    <div class="user-creation">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" class="form-control">
-                    </div>
-                    <div class="user-creation">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control">
-                    </div>
+                <div class="user-creation">
+                    <label for="username"></label>
+                    <input type="search" placeholder="Username" name="username" class="playlist-search">
+                </div>
+                <div class="user-creation">
+                    <label for="password"></label>
+                    <input type="search" placeholder="Password" name="password" class="playlist-search">
+                </div>
 
 
-                    <button type="submit">Sign up</button>
-                    <% if (message) { %>
-                        <p>
-                            <%= message %>
-                        </p>
-                        <% } %>
-                </form>
+                <button type="submit">Sign up</button>
+                <% if (message) { %>
+                    <p>
+                        <%= message %>
+                    </p>
+                    <% } %>
+            </form>
 
-                <a class="btn login" href="/auth/login">Have an account?</a>
+            <a class="btn login" href="/auth/login">Have an account?</a>
 
-            </div>
         </div>
     </div>
-</body>
-
-</html>
+</div>

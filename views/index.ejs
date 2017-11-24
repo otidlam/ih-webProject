@@ -1,34 +1,30 @@
-<!DOCTYPE html>
-<html>
+<header>
+  <%if (user){ %>
+    <a class="btn-logout" href="/auth/logout">Log Out</a>
+    <% } else { %>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-  <!--320-->
-  <title>DubJube</title>
-  <link rel="stylesheet" href="/stylesheets/style.css" />
-</head>
-
-<body>
-  <header>
-    <%if (user){ %>
-      <a class="btn logout" href="/auth/logout">Log Out</a>
-      <% } else { %>
-        <a class="btn login" href="/auth/login">Log In</a>
-        <a class="btn signup" href="/auth/signup">Sign Up</a>
-        <% } %>
-  </header>
+      <a class="btn-signup" href="/auth/signup">Sign Up</a>
+      <a class="btn-login" href="/auth/login">Log In</a>
+      <% } %>
+</header>
+<div class="container">
 
   <div class="logo">
-    <img src="img/Logo.png">
+    <img src="/img/Logo.png">
   </div>
-  <div class="create">
-    <a class="btn create-playlist" href="/playlist/new">Create playlist</a>
-  </div>
+
   <div class="search">
-    <form action="/playlist/search" method="post">
-      <input type="search" name="searchPlaylist">
-      <button type="submit" class="search">Go!</button>
-    </form>
+    <div class="create">
+      <a class="btn create-playlist" href="/playlist/new">Create playlist</a>
+    </div>
+    <div class="playlist-search">
+      <form action="/playlist/search" method="post">
+        <input type="search" class="input-s" name="searchPlaylist">
+        <button type="submit">Go!</button>
+      </form>
+    </div>
+  </div>
+  <div>
     <% if(searchResult !== null) { %>
       <% JSON.stringify(searchResult, null, 2) %>
         <% searchResult.forEach((el) => { %>
@@ -42,8 +38,6 @@
   </div>
 
   <footer>
-    <img src="img/IMG.png" alt="footer">
+    <img src="/img/IMG.png" class="img-footer" alt="footer">
   </footer>
-</body>
-
-</html>
+</div>
